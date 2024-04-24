@@ -14,9 +14,11 @@ cd /home/josh
 rm -rf venv
 python3 -m venv venv
 source venv/bin/activate
-echo "source /home/josh/venv/bin/activate" >> "~/.zshrc"
-python3 -m pip install --quiet --upgrade pip numpy pandas jupyter matplotlib ipykernel scipy statsmodels scikit-learn polars
+python3 -m pip install --quiet --upgrade pip numpy pandas jupyter notebook==7.0.8 matplotlib ipykernel scipy statsmodels scikit-learn polars
 python3 -m ipykernel install --user --name=venv --display-name="Python (venv)"
+
+# change zsh defualts
+echo "source /home/josh/venv/bin/activate" >> "~/.zshrc"
 
 # start jupyter server in a detached screen session
 screen -dmS jupyter zsh -c "cd /home/josh && jupyter notebook --allow-root --no-browser --port=8888 --NotebookApp.token='' --NotebookApp.password=''"
