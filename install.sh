@@ -9,6 +9,15 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 # Set zsh as the default shell
 chsh -s $(which zsh)
 
+# Setup python venv
+cd /home/josh
+rm -rf venv
+python3 -m venv venv
+source venv/bin/activate
+python3 -m pip install --upgrade pip numpy pandas jupyter matplotlib ipykernel scipy statsmodels scikit-learn polars
+python3 -m ipykernel install --user --name=venv --display-name="Python (venv)"
+echo 'alias python3="/home/josh/venv/bin/python3"' >> ~/.zshrc
+
 # start jupyter server in a detached screen session
 screen -dmS jupyter zsh -c "cd /home/josh && jupyter notebook --allow-root --no-browser --port=8888 --NotebookApp.token='' --NotebookApp.password=''"
 
