@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # install packages
-apt update && sudo apt install -y htop zsh screen jupyter-notebook
+apt update && sudo apt install -y zsh screen htop
 
 # install ohmyzsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -22,5 +22,8 @@ eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
 
 # Print SSH public key
+echo "---------"
 echo "SSH key generated. Please add the following public key to GitHub:"
 cat ~/.ssh/id_ed25519.pub
+echo "---------"
+echo "Logout and log back in to activate zsh if not already activated."
