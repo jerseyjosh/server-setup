@@ -2,7 +2,7 @@
 apt update && apt install -y zsh screen htop
 
 # install ohmyzsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
+ZSH = sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
 
 # Set zsh as the default shell
 chsh -s $(which zsh)
