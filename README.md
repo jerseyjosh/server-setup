@@ -5,6 +5,6 @@ Script to automate the setup of a server environment. It installs essential pack
 ## Usage
 
    ```bash
-   curl -fsSL https://raw.githubusercontent.com/jerseyjosh/server-setup/main/install.sh | bash
+   curl -fsSL https://raw.githubusercontent.com/jerseyjosh/server-setup/main/setup.sh | bash
    ```
 Then manually add printed key to github.
