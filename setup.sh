@@ -12,7 +12,17 @@ cd /home/josh
 rm -rf venv
 python3 -m venv venv
 source venv/bin/activate
-python3 -m pip install --upgrade pip numpy pandas jupyter notebook==7.0.8 matplotlib ipykernel scipy statsmodels scikit-learn polars
+python3 -m pip install --upgrade pip \
+    numpy \
+    pandas \
+    jupyter notebook==7.0.8 \
+    tqdm \
+    matplotlib \
+    ipykernel \
+    scipy \
+    statsmodels \
+    scikit-learn \
+    polars
 python3 -m ipykernel install --user --name=venv --display-name="Python (venv)"
 
 # change zsh defualts
