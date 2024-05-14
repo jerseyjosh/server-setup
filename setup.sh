@@ -1,6 +1,10 @@
 # install packages
 apt update && apt install -y zsh screen htop
 
+# git setup
+git config --global user.email "josh@hakuna.co.uk"
+git config --global user.name "Josh Griffiths"
+
 # install ohmyzsh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" bash --unattended
 
