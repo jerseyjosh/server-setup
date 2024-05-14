@@ -16,7 +16,7 @@ python3 -m pip install --quiet --upgrade pip numpy pandas jupyter notebook==7.0.
 python3 -m ipykernel install --user --name=venv --display-name="Python (venv)"
 
 # change zsh defualts
-echo "source /home/josh/venv/bin/activate" >> "~/.zshrc"
+echo "source /home/josh/venv/bin/activate" >> /home/josh/.zshrc
 
 # start jupyter server in a detached screen session
 screen -dmS jupyter zsh -c "cd /home/josh && jupyter notebook --allow-root --no-browser --port=8888 --NotebookApp.token='' --NotebookApp.password=''"
