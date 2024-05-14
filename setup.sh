@@ -4,7 +4,7 @@
 apt update && apt install -y zsh screen htop
 
 # install ohmyzsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sed 's:env zsh::g' | sed 's:chsh -s .*$::g')"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh::g' | sed 's:chsh -s .*$::g')"
 
 # Set zsh as the default shell
 chsh -s $(which zsh)
