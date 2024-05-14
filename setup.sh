@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # install packages
 apt update && apt install -y zsh screen htop
 
