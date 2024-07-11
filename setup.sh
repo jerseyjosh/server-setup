@@ -31,6 +31,14 @@ python3 -m pip install --upgrade pip \
     cvxpy
 python3 -m ipykernel install --user --name=venv --display-name="Python (venv)"
 
+# install local packages
+cd /home/josh/packages
+python3 -m pip install -e quant-tools
+python3 -m pip install -e dataframe-tools
+python3 -m pip install -e spread-research
+python3 -m pip install -e backtest-client
+python3 -m pip install -e preprocessing
+
 # change zsh defualts
 echo "source /home/josh/venv/bin/activate" >> /root/.zshrc
 
