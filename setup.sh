@@ -27,7 +27,8 @@ python3 -m pip install --upgrade pip \
     statsmodels \
     scikit-learn \
     polars \
-    pyarrow
+    pyarrow \
+    cvxpy
 python3 -m ipykernel install --user --name=venv --display-name="Python (venv)"
 
 # change zsh defualts
