@@ -1,5 +1,5 @@
 # install packages
-apt update && apt install -y zsh screen htop
+apt update && apt install -y zsh screen htop python3-venv
 
 # git setup
 git config --global user.email "josh@hakuna.co.uk"
