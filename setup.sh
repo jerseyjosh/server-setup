@@ -50,6 +50,15 @@ python3 -m pip install --upgrade pip \
 
 python3 -m ipykernel install --user --name=venv --display-name="Python (venv)"
 
+# Create packages directory
+mkdir -p packages
+
+# Change Zsh defaults
+echo "source $HOME_DIR/venv/bin/activate" >> /root/.zshrc
+
+# Start Jupyter server in a detached screen session
+screen -dmS jupyter zsh -c "cd $HOME_DIR && jupyter notebook --allow-root --no-browser --port=8888 --NotebookApp.token='' --NotebookApp.password=''"
+
 # Generate SSH key for GitHub to clone repos
 ssh-keygen -t ed25519 -C "josh@hakuna.co.uk" -f ~/.ssh/id_ed25519 -N ''
 
@@ -58,39 +67,6 @@ eval "$(ssh-agent -s)"
 
 # Add your SSH private key to the ssh-agent
 ssh-add ~/.ssh/id_ed25519
-
-# Install Istari repos
-mkdir -p packages  # Create packages directory if it doesn't exist
-cd packages
-
-repos=(
-    "git@github.com:istari-capital/quant-tools.git"
-    "git@github.com:istari-capital/dataframe-tools.git"
-    "git@github.com:istari-capital/backtest-client.git"
-    "git@github.com:istari-capital/preprocessing.git"
-    "git@github.com:istari-capital/spread-research.git"
-)
-
-# Clone repositories in parallel
-for repo in "${repos[@]}"; do
-    git clone "$repo" &
-done
-
-# Wait for all background jobs to finish
-wait
-
-# Install each new package
-for dir in */; do
-    if [ -d "$dir" ]; then
-        python3 -m pip install "$dir"
-    fi
-done
-
-# Change Zsh defaults
-echo "source $HOME_DIR/venv/bin/activate" >> /root/.zshrc
-
-# Start Jupyter server in a detached screen session
-screen -dmS jupyter zsh -c "cd $HOME_DIR && jupyter notebook --allow-root --no-browser --port=8888 --NotebookApp.token='' --NotebookApp.password=''"
 
 # Print SSH public key
 echo "---------"
