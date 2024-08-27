@@ -14,11 +14,12 @@ chsh -s $(which zsh)
 # Setup python venv
 if [ -d "/home/josh" ]; then
     # use /home/josh if it exists
-    cd /home/josh || exit 1 # quit if fail
+    HOME_DIR = "/home/josh"
 else
     # otherwise default to /home
-    cd /home || exit 1 # quit if fail
+    HOME_DIR = "/home"
 fi
+cd "$HOME_DIR" || exit 1  # cd into home directory, exit if cd fails
 if [ -d "venv" ]; then
     rm -rf venv
 fi
@@ -39,21 +40,7 @@ python3 -m pip install --upgrade pip \
     cvxpy
 python3 -m ipykernel install --user --name=venv --display-name="Python (venv)"
 
-# install local packages
-cd /home/josh/packages
-python3 -m pip install -e quant-tools
-python3 -m pip install -e dataframe-tools
-python3 -m pip install -e spread-research
-python3 -m pip install -e backtest-client
-python3 -m pip install -e preprocessing
-
-# change zsh defualts
-echo "source /home/josh/venv/bin/activate" >> /root/.zshrc
-
-# start jupyter server in a detached screen session
-screen -dmS jupyter zsh -c "cd /home/josh && jupyter notebook --allow-root --no-browser --port=8888 --NotebookApp.token='' --NotebookApp.password=''"
-
-# Generate SSH key for GitHub
+# Generate SSH key for GitHub to clone repos
 ssh-keygen -t ed25519 -C "josh@hakuna.co.uk" -f ~/.ssh/id_ed25519 -N ''
 
 # Start the ssh-agent in the background
@@ -61,6 +48,36 @@ eval "$(ssh-agent -s)"
 
 # Add your SSH private key to the ssh-agent
 ssh-add ~/.ssh/id_ed25519
+
+# install istari repos
+mkdir -p packages # make packages dir if not exists
+cd packages
+repos=(
+    "git@github.com:istari-capital/quant-tools.git"
+    "git@github.com:istari-capital/dataframe-tools.git"
+    "git@github.com:istari-capital/backtest-client.git"
+    "git@github.com:istari-capital/preprocessing.git"
+    "git@github.com:istari-capital/spread-research.git"
+)
+# Loop through the repository URLs and clone them in parallel
+for repo in "${repos[@]}"; do
+    git clone "$repo" &
+done
+# Wait for all background jobs to finish
+wait
+
+# Loop through each new packages and install
+for dir in */; do
+    if [ -d "$dir" ]; then
+        python3 -m pip install "$dir"
+    fi
+done
+
+# change zsh defualts
+echo "source $HOME_DIR/venv/bin/activate" >> /root/.zshrc
+
+# start jupyter server in a detached screen session
+screen -dmS jupyter zsh -c "cd $HOME_DIR && jupyter notebook --allow-root --no-browser --port=8888 --NotebookApp.token='' --NotebookApp.password=''"
 
 # Print SSH public key
 echo "---------"
