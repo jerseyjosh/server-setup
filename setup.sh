@@ -12,8 +12,16 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/m
 chsh -s $(which zsh)
 
 # Setup python venv
-cd /home/josh
-rm -rf venv
+if [ -d "/home/josh" ]; then
+    # use /home/josh if it exists
+    cd /home/josh || exit 1 # quit if fail
+else
+    # otherwise default to /home
+    cd /home || exit 1 # quit if fail
+fi
+if [ -d "venv" ]; then
+    rm -rf venv
+fi
 python3 -m venv venv
 source venv/bin/activate
 python3 -m pip install --upgrade pip \
