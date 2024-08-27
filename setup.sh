@@ -60,7 +60,7 @@ echo "source $HOME_DIR/venv/bin/activate" >> /root/.zshrc
 screen -dmS jupyter zsh -c "cd $HOME_DIR && jupyter notebook --allow-root --no-browser --port=8888 --NotebookApp.token='' --NotebookApp.password=''"
 
 # Generate SSH key for GitHub to clone repos
-ssh-keygen -t ed25519 -C "josh@hakuna.co.uk" -f ~/.ssh/id_ed25519 -N ''
+ssh-keygen -t ed25519 -C "josh@hakuna.co.uk" -f ~/.ssh/id_ed25519 -N '' -q <<< y >/dev/null 2>&1
 
 # Start the ssh-agent in the background
 eval "$(ssh-agent -s)"
