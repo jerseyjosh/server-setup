@@ -14,10 +14,10 @@ chsh -s $(which zsh)
 # Setup python venv
 if [ -d "/home/josh" ]; then
     # use /home/josh if it exists
-    HOME_DIR = "/home/josh"
+    HOME_DIR="/home/josh"
 else
     # otherwise default to /home
-    HOME_DIR = "/home"
+    HOME_DIR="/home"
 fi
 cd "$HOME_DIR" || exit 1  # cd into home directory, exit if cd fails
 if [ -d "venv" ]; then
