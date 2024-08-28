@@ -53,8 +53,8 @@ python3 -m ipykernel install --user --name=venv --display-name="Python (venv)"
 # Create packages directory
 mkdir -p packages
 
-# Change Zsh defaults
-echo "source $HOME_DIR/venv/bin/activate" >> /root/.zshrc
+# Start from home directory and activate venv on login
+echo "cd $HOME_DIR && source $HOME_DIR/venv/bin/activate" >> /root/.zshrc
 
 # Start Jupyter server in a detached screen session
 screen -dmS jupyter zsh -c "cd $HOME_DIR && jupyter notebook --allow-root --no-browser --port=8888 --NotebookApp.token='' --NotebookApp.password=''"
